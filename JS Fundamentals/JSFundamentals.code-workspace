@@ -2,6 +2,12 @@
 	"folders": [
 		{
 			"path": "JavaScriptSyntaxAndOperatorsExercises"
+		},
+		{
+			"path": "JavaScriptDOMLab"
 		}
-	]
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "JavaScriptDOMLab"
+	}
 }
