@@ -9,7 +9,7 @@ const add = (function(){
 
     add.toString = function (){
         return sum;
-    }
+    };
 
     return add;
 })();
