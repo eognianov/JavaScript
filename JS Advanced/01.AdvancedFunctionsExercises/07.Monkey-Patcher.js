@@ -1,54 +1,42 @@
-let post = {
-    id: '3',
-    author: 'emil',
-    content: 'wazaaaaa',
-    upvotes: 100,
-    downvotes: 100
-};
-
-const solution = function (command) {
-    let totalVotes = this.upvotes + this.downvotes;
-    let balance = this.upvotes - this.downvotes;
-
-    if (command === 'upvote') {
-        this.upvotes++;
-    } else if (command === 'downvote') {
-        this.downvotes++;
-    } else if (command === 'score') {
-        let upVotesResult = this.upvotes;
-        let downVotesResult = this.downvotes;
-
-        if (totalVotes > 50) {
-            let maxVote = Math.max(upVotesResult, downVotesResult);
-            let reportedScore = Math.ceil(maxVote * 0.25);
-            upVotesResult += reportedScore;
-            downVotesResult += reportedScore;
+function solution(cmd){
+    let post=this;
+    let obj=(()=>{    
+    function upvote() {post.upvotes+=1;};
+    function downvote() {post.downvotes+=1;};
+    function score(){
+   
+        let totalPosts=post.downvotes+post.upvotes;
+        let mostRatings=post.downvotes>=post.upvotes?post.downvotes:post.upvotes;
+       
+        let PositiveVibe=post.upvotes/totalPosts*100>66;
+        let NegativeVibe=post.downvotes/totalPosts*100>50;
+        let votesOverHundred=post.downvotes>=100?true:post.upvotes>=100?true:false;
+        let rating;
+        if(totalPosts<10){
+          rating='new';
+        }else if(totalPosts>10 && !PositiveVibe && !NegativeVibe && !votesOverHundred){
+            rating='new';
         }
-
-        return [upVotesResult, downVotesResult, balance, getRating.call(this)];
-
-        function getRating() {
-            if (totalVotes < 10) {
-                return 'new';
-            } else if (this.upvotes > (this.upvotes + this.downvotes) * 0.66) {
-                return 'hot';
-            } else if (balance >= 0 && (this.upvotes > 100 || this.downvotes > 100)) {
-                return 'controversial';
-            } else if (balance < 0) {
-                return 'unpopular';
-            } else {
-                return 'new';
-            }
+        else if(PositiveVibe){
+          rating='hot';
+        }else if(!NegativeVibe && votesOverHundred){
+          rating='controversial';      
+        }else{
+            rating='unpopular';
         }
-    }
+        let difference=post.upvotes-post.downvotes;
+        if(totalPosts>50){
+        let bonusComments=Math.ceil(mostRatings*0.25);
+        let result=[post.upvotes+bonusComments,post.downvotes+bonusComments,difference];
+        result.push(rating)
+        return result;
+      }
+      let resultNotTampered=[post.upvotes,post.downvotes,difference];
+      resultNotTampered.push(rating)
+      return resultNotTampered;
+    };
+   
+    return  {upvote,downvote,score}
+})();
+return obj[cmd]();
 };
-
-solution.call(post, 'upvote');
-solution.call(post, 'downvote');
-let score = solution.call(post, 'score');
-
-for (let i = 0; i < 50; i++) {
-    solution.call(post, 'downvote');
-}
-
-score = solution.call(post, 'score');
