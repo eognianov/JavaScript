@@ -26,9 +26,9 @@ class Rat{
 
 let test = new Rat("Pesho");
 console.log(test.toString());
-// console.log(test.getRats());
+console.log(test.getRats());
 
-// test.unite(new Rat("Gosho"));
-// test.unite(new Rat("Sasho"));
-// console.log(test.getRats());
-// console.log(test.toString());
+test.unite(new Rat("Gosho"));
+test.unite(new Rat("Sasho"));
+console.log(test.getRats());
+console.log(test.toString());
