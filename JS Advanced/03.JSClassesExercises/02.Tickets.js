@@ -1,4 +1,11 @@
 function solve(inputArray, searchTerm) {
+    class Ticket {
+        constructor(destination, price, status) {
+            this.destination = destination;
+            this.price = price;
+            this.status = status;
+        }
+    }
     let tickets = [];
     let ticketsRaw = Array.from(inputArray);
 
@@ -7,11 +14,7 @@ function solve(inputArray, searchTerm) {
         let destination = currentTicket[0];
         let price = +currentTicket[1];
         let status = currentTicket[2];
-        let ticket = {
-            destination,
-            price,
-            status
-        };
+        let ticket =new Ticket(destination, price, status);
         tickets.push(ticket);
     });
 
