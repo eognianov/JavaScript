@@ -7,5 +7,7 @@
 			"path": "JS Applications"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "JS Applications"
+	}
 }
