@@ -1,0 +1,1 @@
+window.handler = window.handler || {};

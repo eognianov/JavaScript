@@ -1,0 +1,20 @@
+{{#each otherSongs}}
+<div class="song">
+    <h5>Title: {{title}}</h5>
+    <h5>Artist: {{artist}}</h5>
+    <img class="cover" src="{{imageURL}}" />
+    <p>Likes: {{likes}}</p>
+    <a href="#/like/:{{_id}}"><button type="button" onclick="like" class="btn btn-primary mt-4">Like</button></a>
+</div>
+{{/each}}
+
+{{#each mySongs}}
+<div class="song">
+    <h5>Title: {{title}}</h5>
+    <h5>Artist: {{artist}}</h5>
+    <img class="cover" src="{{imageURL}}" />
+    <p>Likes: {{likes}}; Listened {{listen}} times</p>
+    <a href="#/remove/:{{_id}}"><button type="button" class="btn btn-danger mt-4">Remove</button></a>
+    <a href="#/listen/:{{_id}}"><button type="button" class="btn btn-success mt-4">Listen</button></a>
+</div>
+{{/each}}
