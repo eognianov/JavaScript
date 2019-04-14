@@ -14,14 +14,24 @@ handler.getLogin = function (ctx) {
 };
 
 handler.postLogin = function (ctx) {
-    let {username, passowrd} = ctx.params;
+    let username = ctx.params.username;
+    let password = ctx.params.password;
+    userService.login(username, password).then((res) => {
+      userService.saveSession(res);
+      notifications.showInfo('Login successful.');
+      ctx.redirect('#/dashboard');
+    }).catch(function (err) {
+      notifications.showError('Invalid username or password');
+      ctx.redirect('#/login');
+    });
+  }
 
-    userService.login(username, passowrd).then(res=>{
-        userService.saveSession(res);
-        notifications.showSuccess('Logged in successful');
+handler.logout = function (ctx) {
+    userService.logout().then(()=>{
+        notifications.showSuccess('Logged out');
         ctx.redirect('#/home');
-    }).catch(err=>notifications.showResponseError(err));
-}
+    });
+};
 
 handler.getRegister = function (ctx) {
     loadPartials(ctx).then(function () {
